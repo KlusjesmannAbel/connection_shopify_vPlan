@@ -1,0 +1,9 @@
+Fronten RAL9010 = ad6d0814-4768-4304-81f6-e6b20e588dc0
+Fronten Maatwerk Kleur = a1fd731c-b9f9-49c2-be93-58562910ee7b
+Corpus = e5eb7b93-8893-4391-bc95-0ac40c887675
+Fronten Grondverf = 6bc00e21-7778-4b0f-bed9-87aa8ec2d87c
+
+
+stages:
+01b. CNC zwart = 1d3595df-cd25-4c76-995c-30c7c3c2b565
+01a. CNC wit = 4049b6fc-b4fb-45bb-b1c1-b729205d4c6f
