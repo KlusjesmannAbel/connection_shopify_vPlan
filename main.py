@@ -41,7 +41,7 @@ async def integration(request: IntegrationRequest):
 		"name": request.name,
 		"description": request.description,
 		"labels": labels,
-		"custom_fields": [{"name": "shopify_id","type":"text", "value":"ID", "priority": 0}],
+		"custom_fields": [{"name": "shopify_id","type":"text", "value":request.order_id, "priority": 0}],
 		"board_id": VPLAN_BOARD_ID,
 		"due_date": request.due_date
 	}
