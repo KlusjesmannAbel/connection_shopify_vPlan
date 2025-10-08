@@ -29,7 +29,7 @@ async def get_labels():
 	
 	return res.json()
 
-@router.get("/statuses")
+@router.get("/status")
 async def get_status():
 	async with httpx.AsyncClient() as client:
 		res = await client.get(
@@ -42,6 +42,8 @@ async def get_status():
 		)
 	if res.status_code != 200:
 		return {"error": res.text, "status": res.status_code}
+	
+	return res.json()
 
 @router.get("/stages")
 async def get_stages():

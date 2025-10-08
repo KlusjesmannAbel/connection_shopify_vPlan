@@ -30,7 +30,7 @@ class IntegrationRequest(BaseModel):
 async def integration(request: IntegrationRequest):
 	labels = []
 	if "Maatwerk kleur (kies later)" in request.description or "Verkeerswit (RAL9016)" in request.description or "Gitzwart (RAL9005)" in request.description:
-		labels.append({"id":"ad6d0814-4768-4304-81f6-e6b20e588dc0"})
+		labels.append({"id":"a1fd731c-b9f9-49c2-be93-58562910ee7b"})
 	elif "Zuiver wit (RAL9010)" in request.description:
 		labels.append({"id":"ad6d0814-4768-4304-81f6-e6b20e588dc0"})
 	elif "Schilderklaar" in request.description:
@@ -61,9 +61,13 @@ async def integration(request: IntegrationRequest):
 	if res.status_code not in [200, 201]:
 		return {"error": res.text, "status": res.status_code}
 	data = res.json()
-	print(data["id"])
+
+
 	#put the collection to the board
-	payload = {}
+	payload = {
+		"status_id": "82c96354-7982-4ee5-9ea8-2f3d9acca46b",
+		"stage_id": "4049b6fc-b4fb-45bb-b1c1-b729205d4c6f"
+	}
 	async with httpx.AsyncClient() as client:
 		res = await client.post(
 			f"{VPLAN_API_URL}/collection/{data['id']}/board/{VPLAN_BOARD_ID}",
@@ -74,6 +78,10 @@ async def integration(request: IntegrationRequest):
 			},
 			json=payload
 		)
+	
+	print(res)
+	if res.status_code not in [200, 201]:
+		return {"error": res.text, "status": res.status_code}
 	
 	#return collection_id to shopify
 	companion_body = {
