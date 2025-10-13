@@ -64,10 +64,7 @@ async def integration(request: IntegrationRequest):
 
 
 	#put the collection to the board
-	payload = {
-		"status_id": "82c96354-7982-4ee5-9ea8-2f3d9acca46b",
-		"stage_id": "4049b6fc-b4fb-45bb-b1c1-b729205d4c6f"
-	}
+	payload = {}
 	async with httpx.AsyncClient() as client:
 		res = await client.post(
 			f"{VPLAN_API_URL}/collection/{data['id']}/board/{VPLAN_BOARD_ID}",
