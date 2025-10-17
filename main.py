@@ -62,7 +62,7 @@ async def integration(request: IntegrationRequest):
 		return {"error": res.text, "status": res.status_code}
 	data = res.json()
 
-	time.sleep()
+	time.sleep(2)
 	#put the collection to the board
 	payload = {}
 	async with httpx.AsyncClient() as client:
