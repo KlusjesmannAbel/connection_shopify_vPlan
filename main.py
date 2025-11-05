@@ -160,3 +160,33 @@ async def integration(request: IntegrationRequest):
 			},
 			json=companion_body
 		)
+
+
+class CollectionUpdateRequest(BaseModel):
+	name: str
+	collection_id: str
+	due_date: str = ""
+
+@app.put("/vplan/collection")
+async def integration(request: CollectionUpdateRequest):
+	if request.due_date == "":
+		payload = {
+			"name": request.name
+		}
+	else:
+		payload = {
+			"name": request.name,
+			"due_date": request.due_date
+		}
+	async with httpx.AsyncClient() as client:
+		res = await client.put(
+			f"{VPLAN_API_URL}/collection/{request.collection_id}",
+			headers={
+				"X-Api-Key": VPLAN_API_KEY,
+				"X-Api-Env": VPLAN_API_ENV,
+				"Content-Type": "application/json"
+			},
+			json=payload
+		)
+	if res.status_code not in [200, 201]:
+		return {"error": res.text, "status": res.status_code}
