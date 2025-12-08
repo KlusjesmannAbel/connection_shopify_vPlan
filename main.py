@@ -32,6 +32,7 @@ ACT_INPAKKEN_LAKWERK = os.getenv("ACT_INPAKKEN_LAKWERK")
 ACT_ASSEMBLAGE = os.getenv("ACT_ASSEMBLAGE")
 ACT_QC_ASSEMBLAGE = os.getenv("ACT_QC_ASSEMBLAGE")
 ACT_CNC_ZWART = os.getenv("ACT_CNC_ZWART")
+ACT_KIT_MAKEN = os.getenv("ACT_KIT_MAKEN")
 
 
 app.include_router(utils.router, prefix="/utils", tags=["utils"])
@@ -46,10 +47,12 @@ class IntegrationRequest(BaseModel):
 @app.post("/vplan/integration")
 async def integration(request: IntegrationRequest):
 	labels = []
-	if "Maatwerk kleur (kies later)" in request.description or "Verkeerswit (RAL9016)" in request.description or "Gitzwart (RAL9005)" in request.description:
+	if "Maatwerk kleur (kies later)" in request.description:
 		labels.append({"id":"a1fd731c-b9f9-49c2-be93-58562910ee7b"})
+	elif "Verkeerswit (RAL9016)" in request.description or "Gitzwart (RAL9005)" in request.description:
+		labels.append({"id":"a1fd731c-b9f9-49c2-be93-58562910ee7b"}, {"id":"7727dcd9-3caf-4534-9b40-29a69780a845"})
 	elif "Zuiver wit (RAL9010)" in request.description:
-		labels.append({"id":"ad6d0814-4768-4304-81f6-e6b20e588dc0"})
+		labels.append({"id":"ad6d0814-4768-4304-81f6-e6b20e588dc0"}, {"id":"7727dcd9-3caf-4534-9b40-29a69780a845"})
 	elif "Schilderklaar" in request.description:
 		labels.append({"id":"6bc00e21-7778-4b0f-bed9-87aa8ec2d87c"})
 	activities = []
@@ -68,6 +71,8 @@ async def integration(request: IntegrationRequest):
 			{"id": ACT_ACHTERKANTEN_SCHUREN, "time":20},
 			{"id": ACT_INPAKKEN_LAKWERK, "time":40}
 		]
+		if "Maatwerk kleur (kies later)" in request.description:
+			act_to_add.append({"id": ACT_KIT_MAKEN, "time":20})
 		activities.extend(act_to_add)
 	elif "Zuiver wit (RAL9010)" in request.description or "Verkeerswit (RAL9016)" in request.description or "Signaalwit (RAL 9003)" in request.description:
 		act_to_add = [
@@ -142,24 +147,24 @@ async def integration(request: IntegrationRequest):
 	if res.status_code not in [200, 201]:
 		return {"error": res.text, "status": res.status_code}
 	
-	#return collection_id to shopify
-	companion_body = {
-			"itemId": request.order_id,
-			"specifier": "vPlan collection gemaakt",
-			"additionalParameters": {
-			"stringParameter": data["id"]
-		}
-	}
+	# #return collection_id to shopify
+	# companion_body = {
+	# 		"itemId": request.order_id,
+	# 		"specifier": "vPlan collection gemaakt",
+	# 		"additionalParameters": {
+	# 		"stringParameter": data["id"]
+	# 	}
+	# }
 
-	async with httpx.AsyncClient() as client:
-		res = await client.post(
-			FLOW_COMPANION_URL,
-			headers={
-				"Authorization": f"Bearer {FLOW_COMPANION_TOKEN}",
-				"Content-Type": "application/json"
-			},
-			json=companion_body
-		)
+	# async with httpx.AsyncClient() as client:
+	# 	res = await client.post(
+	# 		FLOW_COMPANION_URL,
+	# 		headers={
+	# 			"Authorization": f"Bearer {FLOW_COMPANION_TOKEN}",
+	# 			"Content-Type": "application/json"
+	# 		},
+	# 		json=companion_body
+	# 	)
 
 
 class CollectionUpdateRequest(BaseModel):
