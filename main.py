@@ -147,24 +147,24 @@ async def integration(request: IntegrationRequest):
 	if res.status_code not in [200, 201]:
 		return {"error": res.text, "status": res.status_code}
 	
-	# #return collection_id to shopify
-	# companion_body = {
-	# 		"itemId": request.order_id,
-	# 		"specifier": "vPlan collection gemaakt",
-	# 		"additionalParameters": {
-	# 		"stringParameter": data["id"]
-	# 	}
-	# }
+	#return collection_id to shopify
+	companion_body = {
+			"itemId": request.order_id,
+			"specifier": "vPlan collection gemaakt",
+			"additionalParameters": {
+			"stringParameter": data["id"]
+		}
+	}
 
-	# async with httpx.AsyncClient() as client:
-	# 	res = await client.post(
-	# 		FLOW_COMPANION_URL,
-	# 		headers={
-	# 			"Authorization": f"Bearer {FLOW_COMPANION_TOKEN}",
-	# 			"Content-Type": "application/json"
-	# 		},
-	# 		json=companion_body
-	# 	)
+	async with httpx.AsyncClient() as client:
+		res = await client.post(
+			FLOW_COMPANION_URL,
+			headers={
+				"Authorization": f"Bearer {FLOW_COMPANION_TOKEN}",
+				"Content-Type": "application/json"
+			},
+			json=companion_body
+		)
 
 
 class CollectionUpdateRequest(BaseModel):
