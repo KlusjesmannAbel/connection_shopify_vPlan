@@ -50,9 +50,11 @@ async def integration(request: IntegrationRequest):
 	if "Maatwerk kleur (kies later)" in request.description:
 		labels.append({"id":"a1fd731c-b9f9-49c2-be93-58562910ee7b"})
 	elif "Verkeerswit (RAL9016)" in request.description or "Gitzwart (RAL9005)" in request.description:
-		labels.append({"id":"a1fd731c-b9f9-49c2-be93-58562910ee7b"}, {"id":"7727dcd9-3caf-4534-9b40-29a69780a845"})
+		labels.append({"id":"a1fd731c-b9f9-49c2-be93-58562910ee7b"})
+		labels.append({"id":"7727dcd9-3caf-4534-9b40-29a69780a845"})
 	elif "Zuiver wit (RAL9010)" in request.description:
-		labels.append({"id":"ad6d0814-4768-4304-81f6-e6b20e588dc0"}, {"id":"7727dcd9-3caf-4534-9b40-29a69780a845"})
+		labels.append({"id":"ad6d0814-4768-4304-81f6-e6b20e588dc0"})
+		labels.append({"id":"7727dcd9-3caf-4534-9b40-29a69780a845"})
 	elif "Schilderklaar" in request.description:
 		labels.append({"id":"6bc00e21-7778-4b0f-bed9-87aa8ec2d87c"})
 	activities = []
