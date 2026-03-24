@@ -46,59 +46,60 @@ class IntegrationRequest(BaseModel):
 
 @app.post("/vplan/integration")
 async def integration(request: IntegrationRequest):
-	labels = []
-	if "Maatwerk kleur (kies later)" in request.description:
-		labels.append({"id":"a1fd731c-b9f9-49c2-be93-58562910ee7b"})
-	elif "Verkeerswit (RAL9016)" in request.description or "Gitzwart (RAL9005)" in request.description:
-		labels.append({"id":"a1fd731c-b9f9-49c2-be93-58562910ee7b"})
-		labels.append({"id":"7727dcd9-3caf-4534-9b40-29a69780a845"})
-	elif "Zuiver wit (RAL9010)" in request.description:
-		labels.append({"id":"ad6d0814-4768-4304-81f6-e6b20e588dc0"})
-		labels.append({"id":"7727dcd9-3caf-4534-9b40-29a69780a845"})
-	elif "Schilderklaar" in request.description:
-		labels.append({"id":"6bc00e21-7778-4b0f-bed9-87aa8ec2d87c"})
-	activities = []
-	if "Maatwerk kleur (kies later)" in request.description or "Gitzwart (RAL9005)" in request.description:
-		act_to_add = [
-			{"id": ACT_CNC_WIT, "time":40},
-			{"id": ACT_ZIJKANTEN_SCHUREN, "time":20},
-			{"id": ACT_ACHTERKANTEN_PLAKKEN, "time":60},
-			{"id": ACT_CONTROLE_VOOR_GROND, "time":5},
-			{"id": ACT_GRONDLAK, "time":40},
-			{"id": ACT_DROGEN_GRONDLAK, "time":0},
-			{"id": ACT_TUSSENSCHUREN, "time":40},
-			{"id": ACT_AFLAK, "time":60},
-			{"id": ACT_DROGEN_AFLAK, "time":0},
-			{"id": ACT_QC_EINDLAAG, "time":10},
-			{"id": ACT_ACHTERKANTEN_SCHUREN, "time":20},
-			{"id": ACT_INPAKKEN_LAKWERK, "time":40}
-		]
+	if request.has_fronten == True:
+		labels = []
 		if "Maatwerk kleur (kies later)" in request.description:
-			act_to_add.append({"id": ACT_KIT_MAKEN, "time":20})
-		activities.extend(act_to_add)
-	elif "Zuiver wit (RAL9010)" in request.description or "Verkeerswit (RAL9016)" in request.description or "Signaalwit (RAL 9003)" in request.description:
-		act_to_add = [
-			{"id": ACT_CNC_WIT, "time":40},
-			{"id": ACT_ZIJKANTEN_SCHUREN, "time":20},
-			{"id": ACT_CONTROLE_VOOR_GROND, "time":5},
-			{"id": ACT_GRONDLAK, "time":40},
-			{"id": ACT_DROGEN_GRONDLAK, "time":0},
-			{"id": ACT_TUSSENSCHUREN, "time":40},
-			{"id": ACT_AFLAK, "time":60},
-			{"id": ACT_DROGEN_AFLAK, "time":0},
-			{"id": ACT_QC_EINDLAAG, "time":10},
-			{"id": ACT_ACHTERKANTEN_SCHUREN, "time":20},
-			{"id": ACT_INPAKKEN_LAKWERK, "time":40}
-		]
-		activities.extend(act_to_add)
-	elif "Schilderklaar" in request.description:
-		act_to_add = [
-			{"id": ACT_CNC_WIT, "time":40},
-			{"id": ACT_ZIJKANTEN_SCHUREN, "time":20},
-			{"id": ACT_CONTROLE_VOOR_GROND, "time":5},
-			{"id": ACT_INPAKKEN_LAKWERK, "time":40}
-		]
-		activities.extend(act_to_add)
+			labels.append({"id":"a1fd731c-b9f9-49c2-be93-58562910ee7b"})
+		elif "Verkeerswit (RAL9016)" in request.description or "Gitzwart (RAL9005)" in request.description:
+			labels.append({"id":"a1fd731c-b9f9-49c2-be93-58562910ee7b"})
+			labels.append({"id":"7727dcd9-3caf-4534-9b40-29a69780a845"})
+		elif "Zuiver wit (RAL9010)" in request.description:
+			labels.append({"id":"ad6d0814-4768-4304-81f6-e6b20e588dc0"})
+			labels.append({"id":"7727dcd9-3caf-4534-9b40-29a69780a845"})
+		elif "Schilderklaar" in request.description:
+			labels.append({"id":"6bc00e21-7778-4b0f-bed9-87aa8ec2d87c"})
+		activities = []
+		if "Maatwerk kleur (kies later)" in request.description or "Gitzwart (RAL9005)" in request.description:
+			act_to_add = [
+				{"id": ACT_CNC_WIT, "time":40},
+				{"id": ACT_ZIJKANTEN_SCHUREN, "time":20},
+				{"id": ACT_ACHTERKANTEN_PLAKKEN, "time":60},
+				{"id": ACT_CONTROLE_VOOR_GROND, "time":5},
+				{"id": ACT_GRONDLAK, "time":40},
+				{"id": ACT_DROGEN_GRONDLAK, "time":0},
+				{"id": ACT_TUSSENSCHUREN, "time":40},
+				{"id": ACT_AFLAK, "time":60},
+				{"id": ACT_DROGEN_AFLAK, "time":0},
+				{"id": ACT_QC_EINDLAAG, "time":10},
+				{"id": ACT_ACHTERKANTEN_SCHUREN, "time":20},
+				{"id": ACT_INPAKKEN_LAKWERK, "time":40}
+			]
+			if "Maatwerk kleur (kies later)" in request.description:
+				act_to_add.append({"id": ACT_KIT_MAKEN, "time":20})
+			activities.extend(act_to_add)
+		elif "Zuiver wit (RAL9010)" in request.description or "Verkeerswit (RAL9016)" in request.description or "Signaalwit (RAL 9003)" in request.description:
+			act_to_add = [
+				{"id": ACT_CNC_WIT, "time":40},
+				{"id": ACT_ZIJKANTEN_SCHUREN, "time":20},
+				{"id": ACT_CONTROLE_VOOR_GROND, "time":5},
+				{"id": ACT_GRONDLAK, "time":40},
+				{"id": ACT_DROGEN_GRONDLAK, "time":0},
+				{"id": ACT_TUSSENSCHUREN, "time":40},
+				{"id": ACT_AFLAK, "time":60},
+				{"id": ACT_DROGEN_AFLAK, "time":0},
+				{"id": ACT_QC_EINDLAAG, "time":10},
+				{"id": ACT_ACHTERKANTEN_SCHUREN, "time":20},
+				{"id": ACT_INPAKKEN_LAKWERK, "time":40}
+			]
+			activities.extend(act_to_add)
+		elif "Schilderklaar" in request.description:
+			act_to_add = [
+				{"id": ACT_CNC_WIT, "time":40},
+				{"id": ACT_ZIJKANTEN_SCHUREN, "time":20},
+				{"id": ACT_CONTROLE_VOOR_GROND, "time":5},
+				{"id": ACT_INPAKKEN_LAKWERK, "time":40}
+			]
+			activities.extend(act_to_add)
 	if request.has_corpus:
 		act_to_add = [
 			{"id": ACT_CNC_ZWART, "time":60},
