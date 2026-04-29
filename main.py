@@ -49,7 +49,7 @@ class IntegrationRequest(BaseModel):
 async def integration(request: IntegrationRequest):
 	if request.has_fronten == True:
 		labels = []
-		if "Maatwerk kleur (kies later)" in request.description:
+		if "Maatwerk kleur" in request.description:
 			labels.append({"id":"a1fd731c-b9f9-49c2-be93-58562910ee7b"})
 		elif "Verkeerswit (RAL9016)" in request.description or "Gitzwart (RAL9005)" in request.description:
 			labels.append({"id":"a1fd731c-b9f9-49c2-be93-58562910ee7b"})
@@ -60,7 +60,7 @@ async def integration(request: IntegrationRequest):
 		elif "Schilderklaar" in request.description:
 			labels.append({"id":"6bc00e21-7778-4b0f-bed9-87aa8ec2d87c"})
 		activities = []
-		if "Maatwerk kleur (kies later)" in request.description or "Gitzwart (RAL9005)" in request.description:
+		if "Maatwerk kleur" in request.description or "Gitzwart (RAL9005)" in request.description:
 			act_to_add = [
 				{"id": ACT_CNC_WIT, "time":40},
 				{"id": ACT_ZIJKANTEN_SCHUREN, "time":20},
@@ -75,7 +75,7 @@ async def integration(request: IntegrationRequest):
 				{"id": ACT_ACHTERKANTEN_SCHUREN, "time":20},
 				{"id": ACT_INPAKKEN_LAKWERK, "time":40}
 			]
-			if "Maatwerk kleur (kies later)" in request.description:
+			if "Maatwerk kleur" in request.description:
 				act_to_add.append({"id": ACT_KIT_MAKEN, "time":20})
 			activities.extend(act_to_add)
 		elif "Zuiver wit (RAL9010)" in request.description or "Verkeerswit (RAL9016)" in request.description or "Signaalwit (RAL 9003)" in request.description:
