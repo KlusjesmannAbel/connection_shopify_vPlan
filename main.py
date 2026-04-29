@@ -43,6 +43,7 @@ class IntegrationRequest(BaseModel):
 	due_date: str = ""
 	order_id: str = ""
 	has_corpus: bool = False
+	has_fronten: bool = False
 
 @app.post("/vplan/integration")
 async def integration(request: IntegrationRequest):
