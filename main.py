@@ -47,6 +47,7 @@ class IntegrationRequest(BaseModel):
 
 @app.post("/vplan/integration")
 async def integration(request: IntegrationRequest):
+	activities = []
 	if request.has_fronten == True:
 		labels = []
 		if "Maatwerk kleur" in request.description:
@@ -59,7 +60,6 @@ async def integration(request: IntegrationRequest):
 			labels.append({"id":"7727dcd9-3caf-4534-9b40-29a69780a845"})
 		elif "Schilderklaar" in request.description:
 			labels.append({"id":"6bc00e21-7778-4b0f-bed9-87aa8ec2d87c"})
-		activities = []
 		if "Maatwerk kleur" in request.description or "Gitzwart (RAL9005)" in request.description:
 			act_to_add = [
 				{"id": ACT_CNC_WIT, "time":40},
