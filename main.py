@@ -33,20 +33,33 @@ ACT_ASSEMBLAGE = os.getenv("ACT_ASSEMBLAGE")
 ACT_QC_ASSEMBLAGE = os.getenv("ACT_QC_ASSEMBLAGE")
 ACT_CNC_ZWART = os.getenv("ACT_CNC_ZWART")
 ACT_KIT_MAKEN = os.getenv("ACT_KIT_MAKEN")
+ACT_OVERIGE_ACTIVITEITEN = os.getenv("ACT_OVERIGE_ACTIVITEITEN")
 
 
 app.include_router(utils.router, prefix="/utils", tags=["utils"])
 
-class IntegrationRequest(BaseModel):
+class IntegrationRequestShopify(BaseModel):
 	name: str
 	description: str = ""
 	due_date: str = ""
 	order_id: str = ""
 	has_corpus: bool = False
 	has_fronten: bool = False
+	fronten_aantal: int = 0
+	fronten_platen_aantal: int = 0
+	corpus_platen_aantal: float = 0
+
+
+class IntegrationRequestPersonalTasks(BaseModel):
+	name: str
+	description: str = ""
+	due_date: str = ""
+	duration: int = 0
+	resources: List[str] = []
+
 
 @app.post("/vplan/integration")
-async def integration(request: IntegrationRequest):
+async def integration(request: IntegrationRequestShopify):
 	activities = []
 	labels = []
 	if request.has_fronten == True:
@@ -108,12 +121,18 @@ async def integration(request: IntegrationRequest):
 			{"id": ACT_QC_ASSEMBLAGE, "time":5}
 		]
 		activities.extend(act_to_add)
+	custom_fields = [
+		{"name": "shopify_id","type":"text", "value":request.order_id, "priority": 0},
+		{"name": "shopify_id","type":"number", "value":request.order_id, "priority": 1},
+		{"name": "shopify_id","type":"number", "value":request.order_id, "priority": 2},
+		{"name": "shopify_id","type":"number", "value":request.order_id, "priority": 3}
+	]
 	payload = {
 		"name": request.name,
 		"description": request.description,
 		"labels": labels,
 		"activities":activities,
-		"custom_fields": [{"name": "shopify_id","type":"text", "value":request.order_id, "priority": 0}],
+		"custom_fields": custom_fields,
 		"board_id": VPLAN_BOARD_ID,
 		"due_date": request.due_date
 	}
@@ -197,5 +216,52 @@ async def integration(request: CollectionUpdateRequest):
 			},
 			json=payload
 		)
+	if res.status_code not in [200, 201]:
+		return {"error": res.text, "status": res.status_code}
+
+
+@app.post("/vplan/personal_tasks")
+async def integration(request: IntegrationRequestPersonalTasks):
+	activities = [{"id": ACT_OVERIGE_ACTIVITEITEN, "time": request.duration}]
+	payload = {
+		"name": request.name,
+		"description": request.description,
+		"activities":activities,
+		"board_id": VPLAN_BOARD_ID,
+		"due_date": request.due_date
+	}
+
+	#create collection
+	async with httpx.AsyncClient() as client:
+		res = await client.post(
+			f"{VPLAN_API_URL}/collection",
+			headers={
+				"X-Api-Key": VPLAN_API_KEY,
+				"X-Api-Env": VPLAN_API_ENV,
+				"Content-Type": "application/json"
+			},
+			json=payload
+		)
+
+	if res.status_code not in [200, 201]:
+		return {"error": res.text, "status": res.status_code}
+	data = res.json()
+
+	# put the collection to the board
+	payload = {
+		"resources": request.resources
+	}
+	async with httpx.AsyncClient() as client:
+		res = await client.post(
+			f"{VPLAN_API_URL}/collection/{data['id']}/board/{VPLAN_BOARD_ID}",
+			headers={
+				"X-Api-Key": VPLAN_API_KEY,
+				"X-Api-Env": VPLAN_API_ENV,
+				"Content-Type": "application/json"
+			},
+			json=payload
+		)
+	
+	print(res)
 	if res.status_code not in [200, 201]:
 		return {"error": res.text, "status": res.status_code}

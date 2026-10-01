@@ -26,7 +26,22 @@ async def get_labels():
 		)
 	if res.status_code != 200:
 		return {"error": res.text, "status": res.status_code}
-	
+	return res.json()
+
+@router.get("/resource")
+async def get_resources():
+	print(VPLAN_API_ENV, VPLAN_API_KEY)
+	async with httpx.AsyncClient() as client:
+		res = await client.get(
+			f"{VPLAN_API_URL}/resource",
+			headers={
+				"X-Api-Key": VPLAN_API_KEY,
+				"X-Api-Env": VPLAN_API_ENV,
+				"Content-Type": "application/json"
+			}
+		)
+	if res.status_code != 200:
+		return {"error": res.text, "status": res.status_code}
 	return res.json()
 
 @router.get("/activities")
