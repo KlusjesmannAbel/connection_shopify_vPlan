@@ -125,7 +125,7 @@ async def integration(request: IntegrationRequestShopify):
 		{"name": "shopify_id","type":"text", "value":request.order_id, "priority": 0},
 		{"name": "aantal_fronten","type":"number", "value":request.fronten_aantal, "priority": 1},
 		{"name": "aantal_fronten_platen","type":"number", "value":request.fronten_platen_aantal, "priority": 2},
-		{"name": "aantal_corpus_platen","type":"number", "value":request.corpus_platen_aantal, "priority": 3}
+		{"name": "aantal_corpus_platen","type":"number", "value":request.corpus_platen_aantal, "priority": 3, "options": {"decimals": 1}}
 	]
 	payload = {
 		"name": request.name,
