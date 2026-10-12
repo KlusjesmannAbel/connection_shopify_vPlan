@@ -10,3 +10,279 @@ stages:
 
 status:
 Open = 82c96354-7982-4ee5-9ea8-2f3d9acca46b
+
+
+
+{
+  "count": 2,
+  "limit": 100,
+  "offset": 0,
+  "data": [
+    {
+      "id": "b2a7c932-b55d-4fef-b3b1-825fe6ea477f",
+      "name": "Trapkast productie met veel fases",
+      "workdays": {
+        "1": true,
+        "2": true,
+        "3": true,
+        "4": true,
+        "5": true,
+        "6": false,
+        "7": false
+      },
+      "color": "transparent",
+      "split_cards_by_activity": true,
+      "own_backlog": false,
+      "default_attachment_scope": "collection",
+      "capacity_method": "estimated_time",
+      "visibility": "everyone",
+      "dependency_behavior": "notify",
+      "card_lock_options": [
+        "card.move",
+        "card.edit.name",
+        "card.edit.description",
+        "card.edit.status",
+        "card.edit.date",
+        "card.edit.activities",
+        "card.edit.resources",
+        "card.edit.labels",
+        "card.split",
+        "card.clone",
+        "card.delete",
+        "time.register",
+        "time.edit.other",
+        "time.edit.own",
+        "time.status",
+        "checklist.add",
+        "checklist.delete",
+        "checklist.edit",
+        "custom.field.card"
+      ],
+      "archived_at": null,
+      "created_at": "2023-01-10T19:50:26Z",
+      "updated_at": "2026-02-19T19:02:04Z",
+      "deleted_at": null,
+      "permission_set": "can_manage",
+      "custom_fields": [
+        {
+          "id": "c814f940-375a-4984-92c2-a6e8689f6f9d",
+          "board_id": "b2a7c932-b55d-4fef-b3b1-825fe6ea477f",
+          "name": "aantal_corpus_platen",
+          "type": "number",
+          "scope": "collection",
+          "options": {
+            "unit": "",
+            "decimals": 1,
+            "align": "left",
+            "preview": " 123.456"
+          },
+          "priority": 0,
+          "edit_permission_set": "can_execute",
+          "created_at": "2026-10-01T12:23:58Z",
+          "updated_at": "2026-10-05T08:59:36Z",
+          "editable": true
+        },
+        {
+          "id": "fa04e317-65ef-446d-a5b9-90c74613a38d",
+          "board_id": "b2a7c932-b55d-4fef-b3b1-825fe6ea477f",
+          "name": "aantal_fronten_platen",
+          "type": "number",
+          "scope": "collection",
+          "options": {
+            "unit": "",
+            "decimals": 0,
+            "align": "left",
+            "preview": " 123.456"
+          },
+          "priority": 1,
+          "edit_permission_set": "can_execute",
+          "created_at": "2026-10-01T12:25:33Z",
+          "updated_at": "2026-10-05T08:59:36Z",
+          "editable": true
+        },
+        {
+          "id": "9633c738-f81a-47c8-be37-489b3bfd0cb9",
+          "board_id": "b2a7c932-b55d-4fef-b3b1-825fe6ea477f",
+          "name": "aantal_fronten",
+          "type": "number",
+          "scope": "collection",
+          "options": {
+            "unit": "",
+            "decimals": 0,
+            "align": "left",
+            "preview": " 123.456"
+          },
+          "priority": 2,
+          "edit_permission_set": "can_execute",
+          "created_at": "2026-10-01T12:25:33Z",
+          "updated_at": "2026-10-05T08:59:36Z",
+          "editable": true
+        },
+        {
+          "id": "00eea92a-0c42-4bbc-bf41-bb9230e673a6",
+          "board_id": "b2a7c932-b55d-4fef-b3b1-825fe6ea477f",
+          "name": "aantal_fronten_gespoten",
+          "type": "number",
+          "scope": "collection",
+          "options": {
+            "unit": "",
+            "decimals": 0,
+            "align": "left",
+            "preview": " 123.456"
+          },
+          "priority": 3,
+          "edit_permission_set": "can_execute",
+          "created_at": "2026-10-05T08:59:36Z",
+          "updated_at": "2026-10-05T08:59:36Z",
+          "editable": true
+        },
+        {
+          "id": "5e9e2672-82ad-4baa-a3b3-9843d3badf1b",
+          "board_id": "b2a7c932-b55d-4fef-b3b1-825fe6ea477f",
+          "name": "aantal_fronten_afkeur",
+          "type": "number",
+          "scope": "collection",
+          "options": {
+            "unit": "",
+            "decimals": 0,
+            "align": "left",
+            "preview": " 123.456"
+          },
+          "priority": 4,
+          "edit_permission_set": "can_execute",
+          "created_at": "2026-10-05T08:59:36Z",
+          "updated_at": "2026-10-05T08:59:36Z",
+          "editable": true
+        }
+      ],
+      "statuses": [
+        {
+          "id": "fade8e0a-c44c-4aac-be52-e1817fecd114",
+          "board_id": "b2a7c932-b55d-4fef-b3b1-825fe6ea477f",
+          "name": "In Afwachting",
+          "color": "orange",
+          "priority": 0,
+          "entry": true,
+          "exit": false,
+          "created_at": "2023-02-02T15:10:22Z",
+          "updated_at": "2023-04-26T09:44:39Z"
+        },
+        {
+          "id": "493fe3a3-fcfc-45d1-9a8b-aedd30403e4e",
+          "board_id": "b2a7c932-b55d-4fef-b3b1-825fe6ea477f",
+          "name": "Incompleet",
+          "color": "purple",
+          "priority": 1,
+          "entry": false,
+          "exit": false,
+          "created_at": "2023-02-21T17:04:26Z",
+          "updated_at": "2025-10-23T14:22:42Z"
+        },
+        {
+          "id": "82c96354-7982-4ee5-9ea8-2f3d9acca46b",
+          "board_id": "b2a7c932-b55d-4fef-b3b1-825fe6ea477f",
+          "name": "Open",
+          "color": "green",
+          "priority": 2,
+          "entry": false,
+          "exit": false,
+          "created_at": "2023-01-10T20:35:59Z",
+          "updated_at": "2025-10-23T14:22:42Z"
+        },
+        {
+          "id": "81bcf11b-a4e9-440f-a568-4ea5301c6c9b",
+          "board_id": "b2a7c932-b55d-4fef-b3b1-825fe6ea477f",
+          "name": "Klaar & Gecontroleerd",
+          "color": "blue",
+          "priority": 3,
+          "entry": false,
+          "exit": true,
+          "created_at": "2023-01-10T19:50:26Z",
+          "updated_at": "2023-04-26T09:44:39Z"
+        }
+      ]
+    },
+    {
+      "id": "cd2653e3-7d55-42ba-a8ba-9a72f222c743",
+      "name": "Overige activiteiten",
+      "workdays": {
+        "1": true,
+        "2": true,
+        "3": true,
+        "4": true,
+        "5": true,
+        "6": false,
+        "7": false
+      },
+      "color": "ruby",
+      "split_cards_by_activity": false,
+      "own_backlog": false,
+      "default_attachment_scope": "collection",
+      "capacity_method": "estimated_time",
+      "visibility": "everyone",
+      "dependency_behavior": "notify",
+      "card_lock_options": [
+        "card.move",
+        "card.edit.name",
+        "card.edit.description",
+        "card.edit.status",
+        "card.edit.date",
+        "card.edit.activities",
+        "card.edit.resources",
+        "card.edit.labels",
+        "card.split",
+        "card.clone",
+        "card.delete",
+        "time.register",
+        "time.edit.other",
+        "time.edit.own",
+        "time.status",
+        "checklist.add",
+        "checklist.delete",
+        "checklist.edit",
+        "custom.field.card"
+      ],
+      "archived_at": null,
+      "created_at": "2026-09-23T12:01:20Z",
+      "updated_at": "2026-09-23T12:01:20Z",
+      "deleted_at": null,
+      "permission_set": "can_manage",
+      "custom_fields": [],
+      "statuses": [
+        {
+          "id": "fe5fedf3-5623-4951-9c5c-e59fe113ca0e",
+          "board_id": "cd2653e3-7d55-42ba-a8ba-9a72f222c743",
+          "name": "In afwachting",
+          "color": "orange",
+          "priority": 0,
+          "entry": true,
+          "exit": false,
+          "created_at": "2026-09-23T12:01:20Z",
+          "updated_at": "2026-09-23T12:06:15Z"
+        },
+        {
+          "id": "717dfcf5-f372-4a84-ae87-d20c16999ab0",
+          "board_id": "cd2653e3-7d55-42ba-a8ba-9a72f222c743",
+          "name": "Open",
+          "color": "green",
+          "priority": 1,
+          "entry": false,
+          "exit": false,
+          "created_at": "2026-09-23T12:01:20Z",
+          "updated_at": "2026-09-23T12:06:15Z"
+        },
+        {
+          "id": "a792fe20-22bd-416f-8c80-d00eac39e0a3",
+          "board_id": "cd2653e3-7d55-42ba-a8ba-9a72f222c743",
+          "name": "Klaar & gecontroleerd",
+          "color": "blue",
+          "priority": 2,
+          "entry": false,
+          "exit": true,
+          "created_at": "2026-09-23T12:01:20Z",
+          "updated_at": "2026-09-23T12:06:15Z"
+        }
+      ]
+    }
+  ]
+}

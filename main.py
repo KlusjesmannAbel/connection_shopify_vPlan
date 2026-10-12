@@ -48,6 +48,7 @@ class IntegrationRequestShopify(BaseModel):
 	fronten_aantal: int = 0
 	fronten_platen_aantal: int = 0
 	corpus_platen_aantal: float = 0
+	fusion_model: str = ""
 
 
 class IntegrationRequestPersonalTasks(BaseModel):
@@ -122,10 +123,11 @@ async def integration(request: IntegrationRequestShopify):
 		]
 		activities.extend(act_to_add)
 	custom_fields = [
-		{"name": "shopify_id","type":"text", "value":request.order_id, "priority": 0},
-		{"name": "aantal_fronten","type":"number", "value":request.fronten_aantal, "priority": 1},
-		{"name": "aantal_fronten_platen","type":"number", "value":request.fronten_platen_aantal, "priority": 2},
-		{"name": "aantal_corpus_platen","type":"number", "value":request.corpus_platen_aantal, "priority": 3, "options": {"decimals": 1}}
+		{"name": "fusion_model","type":"link", "value":request.fusion_model, "priority": 0},
+		{"name": "shopify_id","type":"text", "value":request.order_id, "priority": 1},
+		{"name": "aantal_fronten","type":"number", "value":request.fronten_aantal, "priority": 2},
+		{"name": "aantal_fronten_platen","type":"number", "value":request.fronten_platen_aantal, "priority": 3},
+		{"name": "aantal_corpus_platen","type":"number", "value":request.corpus_platen_aantal, "priority": 4, "options": {"decimals": 1}}
 	]
 	payload = {
 		"name": request.name,
